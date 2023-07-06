@@ -865,7 +865,7 @@ ul {
     border: 0;
 }
 .modal-body {    
-    padding: 15px 30px;
+    padding: 0px 30px;
     p {
         color: #4A6B8A;
         margin-bottom: 20px;
@@ -957,7 +957,8 @@ ul {
 }
 .modal-dialog-scrollable .modal-body {
     overflow-y: auto;
-    max-height: calc(100vh - 185px);
+    max-height: calc(100vh - 250px);
+    margin: 20px 0;
 }
 
 .no-arrows::-webkit-inner-spin-button,
@@ -967,4 +968,27 @@ ul {
 }
 .no-arrows {
   -moz-appearance: textfield;
+}
+
+.relative {
+    position: relative !important;
+}
+.dateIcon {
+    position: absolute;
+    right: 6px;
+    top: 5px;
+    height: 100%;
+    pointer-events: none;
+}
+
+.modal-open{
+    .header{
+        padding-right: 17px;
+        @include md{
+            padding-right: 0;
+        }
+    }
+}
+.modal-backdrop{
+    --bs-backdrop-opacity: 0.8;
 }
