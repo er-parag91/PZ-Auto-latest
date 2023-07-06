@@ -4,12 +4,15 @@
 </div>
 <form action="https://formspree.io/f/xayzrngw" method="post">
     <div class="modal-body">
+
         <div class="form-group-row">            
             <div class="row">
                 <div class="col-xl-8 col-12">
                     <div class="form-group">
-                        <label class="label-title">Name <span class="required">*</span></label>
-                        <input class="form-control" name="Name" id="name" placeholder="Enter Your Name" required>
+                        <mat-form-field class="full-width-field">
+                            <mat-label>Name</mat-label>
+                            <input name="Name" id="name" matInput placeholder="Enter your name" value="">
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="col-xl-4 col-12">
