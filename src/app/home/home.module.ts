@@ -8,6 +8,7 @@ import { SwiperModule } from 'swiper/angular';
 import { AppointmentComponent } from './components/appointment/appointment.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     SharedModule,
     SwiperModule,
     MatInputModule,
-    MatFormFieldModule
-  ]
+    MatFormFieldModule,
+    MatDatepickerModule,
+  ],
 })
 export class HomeModule { }
