@@ -9,7 +9,7 @@
    --lite-border-color: #eaeef7;
    --litebg: #F4F5F9;     
    --graybtn:#efefef; 
-
+   --placeholder-text: #8f9bab99;
    --tableheadbg: #E5E7F6;
    --white: #ffffff;
    --red: #ff0000;
@@ -117,6 +117,11 @@ ul {
         color: var(--white);       
     }
 }
+.btn-primary:disabled {
+    background-color: var(--placeholder-text);
+    border-color: var(--placeholder-text);
+    color: darken($color: #8f9bab99, $amount: 50%)
+}
 .btn-white {
     background: var(--white);
     border-color: var(--white);
@@ -159,13 +164,13 @@ ul {
 
 //****||Placeholder Color||*****//
 ::-webkit-input-placeholder {
-    color: rgba(143, 155, 171, 0.6) !important;
+    color: var(--placeholder-text) !important;
 }
 :-ms-input-placeholder {
-    color: rgba(143, 155, 171, 0.6) !important;
+    color: var(--placeholder-text) !important;
 }
 ::placeholder {
-    color: rgba(143, 155, 171, 0.6) !important;
+    color: var(--placeholder-text) !important;
 }
 
 //Header
@@ -858,6 +863,12 @@ ul {
     }
 }
 
+.appointmentForm {
+    .warning {
+        color: var(--red)
+    }
+}
+
 
 // Modal
 .modal-header {    
@@ -973,6 +984,18 @@ ul {
 .relative {
     position: relative !important;
 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
 .dateIcon {
     position: absolute;
     right: 6px;

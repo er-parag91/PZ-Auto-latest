@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppointmentValidators } from './appointment.validators';
 import { CarsMakesModalsYears } from './data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-appointment',
@@ -13,8 +16,19 @@ export class AppointmentComponent implements OnInit {
   modellist:string[] = [];
   minDate: string | undefined;
 
-  constructor(public dialog: NgbActiveModal) {
-
+  form = new FormGroup({
+    Name: new FormControl('', Validators.required),
+    Phone: new FormControl('', AppointmentValidators.phoneValidation),
+    Email: new FormControl('', Validators.email),
+    'Vehicle Year': new FormControl(''),
+    Brand: new FormControl(''),
+    Model: new FormControl(''),
+    Coupon : new FormControl(''),
+    'Reason For Appointment': new FormControl(''),
+    Date: new FormControl('', AppointmentValidators.isPastDateSelected),
+    Time: new FormControl('', Validators.required),
+  })
+  constructor(public dialog: NgbActiveModal, private http: HttpClient) {
    }
 
 
@@ -41,20 +55,21 @@ export class AppointmentComponent implements OnInit {
   }
 
   changeyear(year:any) {   
-    console.log(year); 
     this.brandlist = [
       ...new Set(CarsMakesModalsYears.filter(
           carObject => carObject.start_year <= year && (carObject.end_year === '-' || year <= carObject.end_year)
           ).map(
               carObject => carObject.make
-              ))].sort()
+              ))].sort();
+    this.brandlist.push('Other');
   }
   changebrand(year: any, make:any ) {    
     this.modellist = CarsMakesModalsYears.filter(
         carObject => carObject.start_year <= year 
         && (carObject.end_year === '-' || year <= carObject.end_year) 
         && carObject.make === make
-    ).map(carObject => carObject.model);
+    ).map(carObject => carObject.model).sort()
+    this.modellist.push('Other')
   }
 
   saveRecord() {
@@ -63,4 +78,22 @@ export class AppointmentComponent implements OnInit {
     }
   }
 
+  onSubmit = () => {
+    console.log(this.form, {
+      Name:this.form.value.Name,
+      Phone:this.form.value.Phone,
+      Email:this.form.value.Email,
+      'Vehicle Year':this.form.value['Vehicle Year'],
+      Brand:this.form.value.Brand,
+      Model:this.form.value.Model,
+      Coupon :this.form.value.Coupon ,
+      'Reason For Appointment':this.form.value['Reason For Appointment'],
+      Date:this.form.value.Date,
+      Time:this.form.value.Time,
+    })
+
+    this.http.get('https://formspree.io/f/xayzrngw').subscribe(
+      response => console.log(response)
+    )
+  }
 }

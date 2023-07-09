@@ -6,7 +6,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { SwiperModule } from 'swiper/angular';
 import { AppointmentComponent } from './components/appointment/appointment.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -17,6 +18,9 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
     HomeRoutingModule,
     SharedModule,
     SwiperModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class HomeModule { }
