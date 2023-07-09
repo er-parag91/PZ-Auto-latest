@@ -79,7 +79,7 @@ export class AppointmentComponent implements OnInit {
   }
 
   onSubmit = () => {
-    console.log(this.form, {
+    const formData = {
       Name:this.form.value.Name,
       Phone:this.form.value.Phone,
       Email:this.form.value.Email,
@@ -90,10 +90,11 @@ export class AppointmentComponent implements OnInit {
       'Reason For Appointment':this.form.value['Reason For Appointment'],
       Date:this.form.value.Date,
       Time:this.form.value.Time,
-    })
+    };
 
-    this.http.get('https://formspree.io/f/xayzrngw').subscribe(
-      response => console.log(response)
+    this.http.post('https://formspree.io/f/xayzrngw', formData).subscribe(
+      response => console.log(response),
+      error => console.error(error)
     )
   }
 }
