@@ -7870,25 +7870,3 @@ const  CarsMakesModalsYears: AppointmentDto[] = [
 ];
 
 export {CarsMakesModalsYears}
-
-// loop over json object and get all year then remove duplicate years and sort it to show options from latest to oldest years
-// const getYearsOptions = [
-//     ...new Set(CarsMakesModalsYears.map(
-//             carObject => carObject.start_year
-//             ))].sort((a, b) => b - a)
-
-// const getCarsMakeOptionsByYear = (year) => [
-//     ...new Set(CarsMakesModalsYears.filter(
-//         carObject => carObject.start_year <= year && (carObject.end_year === '-' || year <= carObject.end_year)
-//         ).map(
-//             carObject => carObject.make
-//             ))].sort()
-
-// const getCarsByMakeAndYear = (year, make) => CarsMakesModalsYears.filter(
-//         carObject => carObject.start_year <= year 
-//         && (carObject.end_year === '-' || year <= carObject.end_year) 
-//         && carObject.make === make
-//     ).map(carObject => carObject.model);
-
-// console.log(getCarsMakeOptionsByYear(2023));
-// console.log(getCarsByMakeAndYear(2023, 'Honda'))

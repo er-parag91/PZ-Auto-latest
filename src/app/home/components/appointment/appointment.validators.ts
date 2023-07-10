@@ -9,6 +9,8 @@ export class AppointmentValidators {
 
     static isPastDateSelected(control: AbstractControl): ValidationErrors|null {
         const date = new Date(control.value);
+        // add one more day since new Date is 0 index based
+        date.setDate(date.getDate() + 1);
         const today = new Date();
         
         // Remove the time portion from the dates

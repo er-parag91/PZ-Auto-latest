@@ -15,6 +15,7 @@ export class AppointmentComponent implements OnInit {
   brandlist:string[] = [];
   modellist:string[] = [];
   minDate: string | undefined;
+  appointmentHours: string[] = [];
 
   form = new FormGroup({
     Name: new FormControl('', Validators.required),
@@ -70,6 +71,61 @@ export class AppointmentComponent implements OnInit {
         && carObject.make === make
     ).map(carObject => carObject.model).sort()
     this.modellist.push('Other')
+  }
+
+  onDateSelected = (date: any) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set time to 00:00:00
+  
+    const selectedDate = new Date(date);
+    selectedDate.setDate(selectedDate.getDate() + 1)
+    selectedDate.setHours(0, 0, 0, 0); // Set time to 00:00:00
+    if (selectedDate.getTime() < today.getTime()) {
+      this.appointmentHours = []; // Return empty array for past dates
+    }
+  
+    const startTime = new Date(selectedDate);
+    startTime.setHours(9, 0, 0); // Set start time to 9:00 AM
+  
+    const endTime = new Date(selectedDate);
+    endTime.setHours(18, 0, 0); // Set end time to 6:00 PM
+  
+    const appointmentDurationMinutes = 30;
+    const appointmentHours = [];
+  
+    let currentTime = new Date(startTime);
+    // Check if the current date is today
+    const currentDate = new Date();
+    currentDate.setHours(9, 0, 0);
+  
+    // If the date is today, start from the current time
+    if (selectedDate.getTime() === today.getTime()) {
+      currentTime = new Date(); // Use the current time
+    }
+  
+  
+    // Round the current time to the nearest 30-minute interval
+    const remainderMinutes = currentTime.getMinutes() % appointmentDurationMinutes;
+    if (remainderMinutes !== 0) {
+      currentTime.setMinutes(currentTime.getMinutes() + (appointmentDurationMinutes - remainderMinutes));
+    }
+  
+    while (currentTime <= endTime) {
+      const hour = currentTime.getHours();
+      const minute = currentTime.getMinutes();
+  
+      // Format hour and minute strings with leading zeros
+      const formattedHour = hour.toString().padStart(2, '0');
+      const formattedMinute = minute.toString().padStart(2, '0');
+  
+      const appointmentTime = `${formattedHour}:${formattedMinute} ${hour >= 12 ? 'PM' : 'AM'}`;
+      appointmentHours.push(appointmentTime);
+  
+      // Increment time by the appointment duration
+      currentTime.setTime(currentTime.getTime() + appointmentDurationMinutes * 60000);
+    }
+  
+    this.appointmentHours = appointmentHours;
   }
 
   saveRecord() {
