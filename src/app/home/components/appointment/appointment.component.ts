@@ -77,6 +77,9 @@ export class AppointmentComponent implements OnInit {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Set time to 00:00:00
   
+    const shopOpeningAt = 9; // store open time
+    const shopClosingAt = 18; // store close time
+
     const selectedDate = new Date(date);
     selectedDate.setDate(selectedDate.getDate() + 1)
     selectedDate.setHours(0, 0, 0, 0); // Set time to 00:00:00
@@ -85,22 +88,22 @@ export class AppointmentComponent implements OnInit {
     }
   
     const startTime = new Date(selectedDate);
-    startTime.setHours(9, 0, 0); // Set start time to 9:00 AM
+    startTime.setHours(shopOpeningAt, 0, 0);
   
     const endTime = new Date(selectedDate);
-    endTime.setHours(18, 0, 0); // Set end time to 6:00 PM
-  
-    const appointmentDurationMinutes = 30;
+    endTime.setHours(shopClosingAt, 0, 0);
+
+     // Appointment interval of 30 minutes
+    const appointmentDurationMinutes = 30; 
     const appointmentHours = [];
   
     let currentTime = new Date(startTime);
-    // Check if the current date is today
-    const currentDate = new Date();
-    currentDate.setHours(9, 0, 0);
   
     // If the date is today, start from the current time
     if (selectedDate.getTime() === today.getTime()) {
       currentTime = new Date(); // Use the current time
+      // if current time is earlier than shop opening time, set it to shop open time to generate appt for only office hours
+      if (currentTime.getHours() < shopOpeningAt) currentTime.setHours(shopOpeningAt, 0, 0) 
     }
   
   
@@ -110,12 +113,12 @@ export class AppointmentComponent implements OnInit {
       currentTime.setMinutes(currentTime.getMinutes() + (appointmentDurationMinutes - remainderMinutes));
     }
   
-    while (currentTime <= endTime) {
+    while (currentTime < endTime) {
       const hour = currentTime.getHours();
       const minute = currentTime.getMinutes();
   
       // Format hour and minute strings with leading zeros
-      const formattedHour = hour.toString().padStart(2, '0');
+      const formattedHour = (hour > 12 ? hour % 12 : hour).toString().padStart(2, '0');
       const formattedMinute = minute.toString().padStart(2, '0');
   
       const appointmentTime = `${formattedHour}:${formattedMinute} ${hour >= 12 ? 'PM' : 'AM'}`;
