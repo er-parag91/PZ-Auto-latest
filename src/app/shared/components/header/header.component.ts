@@ -44,16 +44,6 @@ export class HeaderComponent implements OnInit {
       keyboard: false,
     });
     modelRef.componentInstance.title = title;
-
-		// this.modalService.open(appointment, { 
-    //   size: 'lg', centered: true, scrollable: true 
-    // });
-
-    // modelRef.result.then((result) => {
-    //   if (result) {    //     
-    //     modelRef.close();
-    //   }
-    // });
 	}
 
 }

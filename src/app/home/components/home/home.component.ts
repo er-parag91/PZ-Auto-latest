@@ -4,10 +4,6 @@ import * as AOS from 'aos'
 import SwiperCore, { Autoplay, Navigation, Pagination,A11y  } from 'swiper';
 import { AppointmentComponent } from '../appointment/appointment.component';
 SwiperCore.use([Autoplay, Navigation, Pagination, A11y ]);
-
-
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,9 +16,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //AOS.init();
-    //AOS.init({disable: 'mobile'});
-    //AOS.refresh();
     AOS.init({
       duration: 900,
       disable: 'mobile',
@@ -41,20 +34,14 @@ export class HomeComponent implements OnInit {
   }
   
 
-  // Swiper Happy Homeowners
   swiperHappyConfig: any = {    
     slidesPerView: 2,                
     loop: true,
     spaceBetween: 20,    
-    //navigation: true,
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    // autoplay: {
-		// 	delay: 1,
-		// 	disableOnInteraction: false
-		// },
     allowTouchMove: true,
     speed: 500,        		
 		mousewheelControl: true,
@@ -70,7 +57,6 @@ export class HomeComponent implements OnInit {
     }
 
   }
-
 
   //Appointment Modal
   appointmentDialog() {
@@ -101,11 +87,4 @@ export class HomeComponent implements OnInit {
       scrollable: true, 
     });
 	}
-  
-  
-  
-
-  
-  
-
 }
