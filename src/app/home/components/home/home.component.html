@@ -447,38 +447,42 @@
             </div>
             <div class="contactForm mt40 sm-mt25">
                 <h4 class="contactTitle text-white mb25">Contact Us</h4>
-                <form action="https://formspree.io/f/xaygnwop" method="post">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="row">
-                        <div class="col-sm-6 col-12">
-                            <div class="form-group">
-                                <input class="form-control" name="Name" id="name" placeholder="Enter your name *" required>
-                            </div>
+                      <div class="col-sm-6 col-12">
+                        <div class="form-group">
+                          <input class="form-control" formControlName="Name" placeholder="Enter your name *" required>
+                          <p class="warning" *ngIf="form.get('Name')?.touched && form.get('Name')?.invalid">Valid name is required!</p>
                         </div>
-                        <div class="col-sm-6 col-12">
-                            <div class="form-group">
-                                <input class="form-control no-arrows" name="phone" type="tel" type="tel" id="phone" placeholder="Enter your phone no. *" required>
-                            </div>
+                      </div>
+                      <div class="col-sm-6 col-12">
+                        <div class="form-group">
+                          <input class="form-control no-arrows" formControlName="Phone" placeholder="Enter your phone no. *" required>
+                          <p class="warning" *ngIf="form.get('Phone')?.touched && form.get('Phone')?.invalid && form.get('Phone')?.errors?.['invalidPhone']">Valid 10 digit US phone number is Required!</p>
                         </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <input class="form-control" type="email" name="Email" id="email" placeholder="Email">
-                            </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input class="form-control" formControlName="Email" placeholder="Email">
+                          <p class="warning" *ngIf="form.get('Email')?.touched && form.get('Email')?.invalid">Please enter valid email!</p>
                         </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <input class="form-control" name="Subject" id="Subject" placeholder="Subject *" required>
-                            </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input class="form-control" formControlName="Subject" placeholder="Subject">
                         </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <textarea class="form-control" name="message" id="Message" placeholder="Message *" required></textarea>
-                            </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <textarea class="form-control" formControlName="Message" placeholder="Message"></textarea>
                         </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-div btn-primary w-100 justify-content-center">Send</button>
-                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button type="submit" [disabled]="form.invalid" class="btn btn-div btn-primary w-100 justify-content-center">Send</button>
+                      </div>
                     </div>
-                </form>
+                  </form>
+                  
             </div>    
         </div> 
         <div class="contactMap" data-aos="fade-left">

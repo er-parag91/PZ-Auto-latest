@@ -861,6 +861,14 @@ ul {
     .btn {
         height: 45px;
     }
+    .btn:disabled {
+        background-color: var(--primary);
+        border-color: var(--primaryHover);
+        color: darken($color: #8f9bab99, $amount: 80%)
+    }
+    .warning {
+        color: var(--primary)
+    }
 }
 
 .appointmentForm {

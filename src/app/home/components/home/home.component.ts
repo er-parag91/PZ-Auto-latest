@@ -3,6 +3,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as AOS from 'aos'
 import SwiperCore, { Autoplay, Navigation, Pagination,A11y  } from 'swiper';
 import { AppointmentComponent } from '../appointment/appointment.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AppointmentValidators } from '../appointment/appointment.validators';
+
 SwiperCore.use([Autoplay, Navigation, Pagination, A11y ]);
 @Component({
   selector: 'app-home',
@@ -10,8 +14,15 @@ SwiperCore.use([Autoplay, Navigation, Pagination, A11y ]);
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  form = new FormGroup({
+      Name: new FormControl('', Validators.required),
+      Phone: new FormControl('', AppointmentValidators.phoneValidation),
+      Email: new FormControl('', [Validators.email]),
+      Subject: new FormControl(''),
+      Message: new FormControl(''),
+  });
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private http: HttpClient) {
     
   }
 
@@ -87,4 +98,17 @@ export class HomeComponent implements OnInit {
       scrollable: true, 
     });
 	}
+  onSubmit() {
+    const contactFormData = {
+      Name:this.form.value.Name,
+      Phone:this.form.value.Phone,
+      Email:this.form.value.Email,
+      Subject: this.form.value.Subject,
+      Message: this.form.value.Message
+    }
+    this.http.post('https://formspree.io/f/mnqknavp', contactFormData).subscribe(
+      response => console.log(response),
+      error => console.error(error)
+    )
+  }
 }

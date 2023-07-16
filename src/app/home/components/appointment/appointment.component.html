@@ -97,7 +97,7 @@
                     <div class="form-group">
                         <label class="label-title">Time <span class="required">*</span></label>   
                         <select formControlName="Time" class="form-select" name="Time" id="Time" required>
-                            <option disabled value="">Select time</option>
+                            <option disabled value="">Choose time</option>
                             <option *ngFor="let appointmentHour of appointmentHours" [value]="appointmentHour">{{ appointmentHour }}</option>
 
                           </select>
