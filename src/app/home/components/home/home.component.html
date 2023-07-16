@@ -447,7 +447,7 @@
             </div>
             <div class="contactForm mt40 sm-mt25">
                 <h4 class="contactTitle text-white mb25">Contact Us</h4>
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <form *ngIf="!isSubmitted"  [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="row">
                       <div class="col-sm-6 col-12">
                         <div class="form-group">
@@ -482,7 +482,15 @@
                       </div>
                     </div>
                   </form>
-                  
+                  <div *ngIf="isSubmitted" class="thank-you-message">
+                    <h5>Thank you</h5>
+                    <p>Thank you for reaching out to us. Your inquiry has been received, and we will get back to you shortly.</p>
+                    <p>
+                      In the meantime, stay connected with us for the latest updates:
+                      <a class="pointer" target="_blank" href="https://www.facebook.com/profile.php?id=100091940556355">Facebook</a> and
+                      <a class="pointer" target="_blank" href="https://www.instagram.com/pelicanzonenola/">Instagram</a>.
+                    </p>
+                  </div>
             </div>    
         </div> 
         <div class="contactMap" data-aos="fade-left">

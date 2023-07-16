@@ -16,6 +16,7 @@ export class AppointmentComponent implements OnInit {
   modellist:string[] = [];
   minDate: string | undefined;
   appointmentHours: string[] = [];
+  isSubmitted: Boolean = false;
 
   form = new FormGroup({
     Name: new FormControl('', Validators.required),
@@ -152,7 +153,7 @@ export class AppointmentComponent implements OnInit {
     };
 
     this.http.post('https://formspree.io/f/mleydrba', formData).subscribe(
-      response => console.log(response),
+      response => this.isSubmitted = true,
       error => console.error(error)
     )
   }

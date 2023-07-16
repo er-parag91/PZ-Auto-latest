@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
       Subject: new FormControl(''),
       Message: new FormControl(''),
   });
+  isSubmitted: Boolean = false;
 
   constructor(private modalService: NgbModal, private http: HttpClient) {
     
@@ -107,7 +108,7 @@ export class HomeComponent implements OnInit {
       Message: this.form.value.Message
     }
     this.http.post('https://formspree.io/f/mnqknavp', contactFormData).subscribe(
-      response => console.log(response),
+      response => this.isSubmitted = true,
       error => console.error(error)
     )
   }

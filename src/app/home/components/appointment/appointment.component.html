@@ -3,7 +3,7 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
 <form class="appointmentForm" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="modal-body">
+    <div *ngIf="!isSubmitted" class="modal-body">
         <div class="form-group-row">            
             <div class="row">
                 <div class="col-xl-8 col-12">
@@ -106,7 +106,16 @@
             </div>              
         </div>
     </div>
-    <div class="modal-footer">		
+    <div *ngIf="!isSubmitted" class="modal-footer">		
         <button type="submit" [disabled]="form.status !== 'VALID'" class="btn btn-div btn-primary">Submit</button> 
     </div>	
+    <div *ngIf="isSubmitted" class="thank-you-message">
+        <h5>Thank you</h5>
+        <p>Thank you for scheduling appointment. We look forward to see you on {{ form.get('Date')?.value}} at {{ form.get('Time')?.value}}.</p>
+        <p>
+          In the meantime, stay connected with us for the latest updates:
+          <a class="pointer" target="_blank" href="https://www.facebook.com/profile.php?id=100091940556355">Facebook</a> and
+          <a class="pointer" target="_blank" href="https://www.instagram.com/pelicanzonenola/">Instagram</a>.
+        </p>
+    </div>
 </form>

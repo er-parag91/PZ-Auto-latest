@@ -869,11 +869,57 @@ ul {
     .warning {
         color: var(--primary)
     }
+
+    .thank-you-message {
+        padding: 20px;
+        border: 1px solid white;
+        border-radius: 10px;
+        
+    
+        h5 {
+            margin-bottom: 35px;
+            color: var(--white);
+            @include sm {
+                margin-bottom: 10px;
+            }
+        }
+        p {
+            margin: 0 0 20px 0;
+            color: var(--white);
+            @include sm {
+                margin-bottom: 10px;
+            }
+        }
+    
+        a {
+            color: var(--primary);
+        }
+    }
 }
 
 .appointmentForm {
     .warning {
         color: var(--red)
+    }
+
+    .thank-you-message {
+        padding: 20px;
+        text-align: center;
+    
+        h5 {
+            margin-bottom: 35px;
+            color: var(--darkcolor);
+            @include sm {
+                margin-bottom: 10px;
+            }
+        }
+        p {
+            margin: 0 0 20px 0;
+            color: var(--darkcolor);
+            @include sm {
+                margin-bottom: 10px;
+            }
+        }
     }
 }
 
