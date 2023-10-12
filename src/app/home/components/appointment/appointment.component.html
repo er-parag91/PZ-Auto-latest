@@ -20,7 +20,7 @@
     <h4 class="modal-title">Appointment</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
-<form class="appointmentForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="appointmentForm" [formGroup]="form" (ngSubmit)="gtag_report_conversion('https://www.pzautonola.com/'); onSubmit()">
     <div *ngIf="!isSubmitted" class="modal-body">
         <div class="form-group-row">            
             <div class="row">
