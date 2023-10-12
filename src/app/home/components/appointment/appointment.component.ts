@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentValidators } from './appointment.validators';
@@ -30,7 +30,7 @@ export class AppointmentComponent implements OnInit {
     Date: new FormControl('', AppointmentValidators.isPastDateSelected),
     Time: new FormControl('', Validators.required),
   })
-  constructor(public dialog: NgbActiveModal, private http: HttpClient) {
+  constructor(public dialog: NgbActiveModal, private http: HttpClient, private renderer: Renderer2, private el: ElementRef) {
    }
 
 
@@ -38,22 +38,45 @@ export class AppointmentComponent implements OnInit {
     // loop over json object and get all year then remove duplicate years and sort it to show options from latest to oldest years
     this.vehicleYears = [...new Set(CarsMakesModalsYears.map(carObject => carObject.start_year))].sort((a, b) => b - a);
 
-    
-      // Get today's date
-      const today = new Date();
+    // Get today's date
+    const today = new Date();
 
-      // Format the date to yyyy-mm-dd
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, '0');
-      const dd = String(today.getDate()).padStart(2, '0');
-      this.minDate = `${yyyy}-${mm}-${dd}`;
-
+    // Format the date to yyyy-mm-dd
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    this.minDate = `${yyyy}-${mm}-${dd}`;
   }
 
   close() {
     if (this.dialog) {
       this.dialog.close();
     }
+  }
+
+  addGoogleAdsConversionTrackingScript(url: string) {
+    const script = this.renderer.createElement('script');
+
+    // Event snippet for Google Ad Appointment Booking conversion page
+    // In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button.
+    
+    script.text = `
+    function gtag_report_conversion(${url}) {
+      var callback = function () {
+          if (typeof(url) != 'undefined') {
+          window.location = url;
+          }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-345866273/CiYDCOHloOsYEKGA9qQB',
+          'event_callback': callback
+      });
+        return false;
+      }
+    `;
+  
+    // Append the script to the component's native element or the head of the page.
+    this.renderer.appendChild(this.el.nativeElement, script);
   }
 
   changeyear(year:any) {   
@@ -156,5 +179,6 @@ export class AppointmentComponent implements OnInit {
       response => this.isSubmitted = true,
       error => console.error(error)
     )
+    this.addGoogleAdsConversionTrackingScript('https://www.pzautonola.com/');
   }
 }
