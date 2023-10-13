@@ -15,7 +15,7 @@
             </span>
             <div class="headerRight align-center align-between">
                 <div class="menu"> 
-                    <ul>
+                    <ul [ngStyle]="{'visibility': isThankYouPage ? 'hidden' : 'visible'}">
                         <li><a (click)="scrollToId($event,'banner')">Home</a></li>                        
                         <li><a (click)="scrollToId($event,'service')">Our Services</a></li>
                         <li><a (click)="scrollToId($event,'gallery')">Gallery</a></li>

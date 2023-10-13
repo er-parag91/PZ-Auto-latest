@@ -5,13 +5,17 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DefaultLayoutComponent } from './components/default-layout/default-layout.component';
 import { RouterModule } from '@angular/router';
 import { SwiperModule } from 'swiper/angular';
+import { ThankYouLayoutComponent } from './components/thank-you-layout/thank-you-layout.component';
+import { ThankyouComponent } from '../thankyou/thankyou.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    DefaultLayoutComponent
+    DefaultLayoutComponent,
+    ThankYouLayoutComponent,
+    ThankyouComponent
   ],
   imports: [
     CommonModule,

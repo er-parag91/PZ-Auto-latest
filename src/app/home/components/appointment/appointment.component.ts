@@ -4,6 +4,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentValidators } from './appointment.validators';
 import { CarsMakesModalsYears } from './data';
 import { HttpClient } from '@angular/common/http';
+import { BookedAppointmentDetailService } from '../../../shared/services/booked-appointment-detail.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-appointment',
@@ -30,7 +32,7 @@ export class AppointmentComponent implements OnInit {
     Date: new FormControl('', AppointmentValidators.isPastDateSelected),
     Time: new FormControl('', Validators.required),
   })
-  constructor(public dialog: NgbActiveModal, private http: HttpClient, private renderer: Renderer2, private el: ElementRef) {
+  constructor(public dialog: NgbActiveModal, private http: HttpClient, private BookedAppointmentDetailService: BookedAppointmentDetailService, private router: Router) {
    }
 
 
@@ -52,31 +54,6 @@ export class AppointmentComponent implements OnInit {
     if (this.dialog) {
       this.dialog.close();
     }
-  }
-
-  addGoogleAdsConversionTrackingScript(url: string) {
-    const script = this.renderer.createElement('script');
-
-    // Event snippet for Google Ad Appointment Booking conversion page
-    // In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button.
-    
-    script.text = `
-    function gtag_report_conversion(${url}) {
-      var callback = function () {
-          if (typeof(url) != 'undefined') {
-          window.location = url;
-          }
-      };
-      gtag('event', 'conversion', {
-          'send_to': 'AW-345866273/CiYDCOHloOsYEKGA9qQB',
-          'event_callback': callback
-      });
-        return false;
-      }
-    `;
-  
-    // Append the script to the component's native element or the head of the page.
-    this.renderer.appendChild(this.el.nativeElement, script);
   }
 
   changeyear(year:any) {   
@@ -179,6 +156,9 @@ export class AppointmentComponent implements OnInit {
       response => this.isSubmitted = true,
       error => console.error(error)
     )
-    this.addGoogleAdsConversionTrackingScript('https://www.pzautonola.com/');
+
+    this.BookedAppointmentDetailService.setAppointmentDateAndTime(this.form.value.Date || null, this.form.value.Time || null);
+    this.close();
+    this.router.navigate(['thankyou']);
   }
 }

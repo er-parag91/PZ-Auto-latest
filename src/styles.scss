@@ -16,6 +16,7 @@
    --green: #55CC6F;
    --font: 'Barlow', sans-serif;
    --font2: 'Inter', sans-serif;
+   --footer-height: 80px;
 }
 
 // font-family: 'Inter', sans-serif;
@@ -415,6 +416,11 @@ ul {
 .footer {
     background: #011130;
     padding: 30px 0;
+    position: sticky;
+    bottom: 0;
+    height: var(--footer-height);
+    margin-top: -80px;
+
     @include sm {
         padding: 20px 0;
     }
@@ -814,6 +820,7 @@ ul {
 // Contact 
 .contactBg {
     background: var(--secondary);
+    margin-bottom: var(--footer-height);
 }
 .contactSection {
     display: flex;
@@ -1068,4 +1075,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .modal-backdrop{
     --bs-backdrop-opacity: 0.8;
+}
+
+.thankYou {
+    height: 100vh;
+    
+    .thankYou-message {
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        color: var(--darkcolor);
+
+        .subtext {
+            margin-top: 12px;
+        }
+    }
 }

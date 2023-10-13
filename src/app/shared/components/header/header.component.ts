@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ScrollService } from '../../services/scroll.services';
 import { AppointmentComponent } from 'src/app/home/components/appointment/appointment.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +10,17 @@ import { AppointmentComponent } from 'src/app/home/components/appointment/appoin
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isThankYouPage: Boolean = false;
 
   //public currentActive = 1;
   selectedTab: any = 1;
-
  
-  constructor(private modalService: NgbModal, private scrollService: ScrollService) { }
+  constructor(private modalService: NgbModal, private scrollService: ScrollService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.router.url.includes('thankyou')) {
+      this.isThankYouPage = true;
+    }
   }
 
   menuToggle() {

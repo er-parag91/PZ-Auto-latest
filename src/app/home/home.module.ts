@@ -8,6 +8,8 @@ import { SwiperModule } from 'swiper/angular';
 import { AppointmentComponent } from './components/appointment/appointment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BookedAppointmentDetailService } from '../shared/services/booked-appointment-detail.service';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -21,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
-  ]
+  ],
+  providers:[ BookedAppointmentDetailService ]
 })
 export class HomeModule { }
