@@ -493,7 +493,7 @@ ul {
     h1 {
         color: var(--white);
         @include sm {
-            font-size: 30px;
+            font-size: 26px;
             max-width: 300px;
             margin: 0 auto;
         }
@@ -623,7 +623,7 @@ ul {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        h5 {
+        h1 {
             padding-right: 20px;
             font-size: 16px;
             font-weight: 500;
@@ -1019,10 +1019,12 @@ ul {
             right: 15px;
             top: 15px;
         }
-        h3 {
+        h1 {
             margin-bottom: 20px;
+            font-size: 30px;
             @include md {                
                 margin-bottom: 10px;
+                font-size: 24px;
             }
         }   
     }
